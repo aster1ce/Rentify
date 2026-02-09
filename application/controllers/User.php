@@ -9,8 +9,8 @@ class User extends CI_Controller {
     if (!$this->session->userdata('logged_in')) {
         redirect('auth');
     }
-    // Kalau SUDAH login tapi role-nya bukan siswa, lempar ke admin
-    if ($this->session->userdata('role') != 'siswa') {
+    // Kalau SUDAH login tapi role-nya bukan peminjam, lempar ke admin
+    if ($this->session->userdata('role') != 'peminjam') {
         redirect('admin/dashboard');
     }
 }
@@ -18,8 +18,8 @@ class User extends CI_Controller {
     public function dashboard() {
         // Ambl data dari session buat dipajang di view
         $data['nama'] = $this->session->userdata('nama_lengkap');
-        $this->load->view('../views/layout/sidebar.php');
-        $this->load->view('user/dashboard_v', $data);
+        $this->load->view('layout/sidebar');
+        $this->load->view('peminjam/dashboard_v', $data);
     }
 }
 

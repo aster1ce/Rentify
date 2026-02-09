@@ -4,14 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Auth extends CI_Controller {
 
     public function index() {
-        // Cek dulu udah login belum
         if($this->session->userdata('logged_in')) {
-            // Kalau sudah login, arahkan sesuai role-nya masing-masing
-            if ($this->session->userdata('role') == 'admin_staff') {
-                redirect('admin/dashboard');
-            } else {
-                redirect('user/dashboard');
-            }
+            // Pengalihan dashboard sesuai role baru
+            $this->_redirect_by_role($this->session->userdata('role'));
         }
         $this->load->view('auth/login');
     }
@@ -23,6 +18,8 @@ class Auth extends CI_Controller {
         $cek = $this->db->get_where('users', ['username'=> $user])->row_array();
 
         if ($cek) {
+ 
+            // 2. Cek Password (disarankan pakai password_hash nanti)
             if ($pass == $cek['password']) {
                 $data_session = [
                     'id_user'      => $cek['id_user'],
@@ -32,17 +29,25 @@ class Auth extends CI_Controller {
                 ];
                 $this->session->set_userdata($data_session);
 
-                // Arahkan ke dashboard yang bener saat pertama kali login
-                if ($cek['role'] == 'admin_staff') {
-                    redirect('admin/dashboard');
-                } else {
-                    redirect('user/dashboard');
-                }
+                // 3. Arahkan ke dashboard berdasarkan role baru: admin, petugas, peminjam
+                $this->_redirect_by_role($cek['role']);
             } else {
-                echo "password salah";
+                echo "Password salah!";
             }
         } else {
-            echo "username salah";
+            echo "Username tidak ditemukan!";
+        }
+    }
+
+    // Fungsi bantuan biar kodingan tidak duplikat
+    private function _redirect_by_role($role) {
+        if ($role == 'admin') {
+            redirect('admin/dashboard');
+        } elseif ($role == 'petugas') {
+            redirect('petugas/dashboard');
+        } else {
+            // Role peminjam (pengganti guru/siswa)
+            redirect('peminjam/dashboard');
         }
     }
 

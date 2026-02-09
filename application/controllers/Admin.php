@@ -9,8 +9,8 @@ class Admin extends CI_Controller {
         redirect('auth');
     }
     // Kalau SUDAH login tapi role-nya bukan admin, lempar ke user
-    if ($this->session->userdata('role') != 'admin_staff') {
-        redirect('user/dashboard');
+    if ($this->session->userdata('role') != 'admin') {
+        redirect('peminjam/dashboard');
     }
 }
 

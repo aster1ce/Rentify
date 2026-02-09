@@ -4,8 +4,12 @@
     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
     <div style="display: flex; gap: 15px;">
-        <a href="#" style="padding: 15px; background: #16a34a; color: white; text-decoration: none; border-radius: 8px;">📦 Lihat Katalog Alat</a>
-        <a href="#" style="padding: 15px; background: #ca8a04; color: white; text-decoration: none; border-radius: 8px;">🕒 Riwayat Pinjam</a>
+        <a href="#"
+            style="padding: 15px; background: #16a34a; color: white; text-decoration: none; border-radius: 8px;">📦
+            Lihat Katalog Alat</a>
+        <a href="#"
+            style="padding: 15px; background: #ca8a04; color: white; text-decoration: none; border-radius: 8px;">🕒
+            Riwayat Pinjam</a>
     </div>
 
 

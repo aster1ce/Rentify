@@ -5,11 +5,13 @@ class Petugas extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // Pakai nama model yang kamu mau tadi
+
+        // panggil model
         $this->load->model('M_validasi');
+        $this->load->model('M_riwayat');
     }
 
-    // Gunakan fungsi index sebagai Dashboard utama
+    // Lier pake index jadinya ke root dashboard wehla
     public function dashboard()
     {
         $data['total_pending'] = $this->db->get_where('peminjaman', ['status' => 'pending'])->num_rows();
@@ -20,10 +22,9 @@ class Petugas extends CI_Controller
         $this->load->view('petugas/dashboard_v', $data);
     }
 
-    // Fungsi validasi yang pakai TAB tadi
     public function validasi($tab = 'peminjaman')
     {
-        $data['tab_aktif'] = $tab; // Buat nandain tombol mana yang ijo
+        $data['tab_aktif'] = $tab;
         $data['transaksi'] = $this->M_validasi->get_semua_transaksi();
 
         $this->load->view('layout/sidebar');
@@ -66,11 +67,22 @@ class Petugas extends CI_Controller
         redirect('petugas/validasi');
     }
 
-    public function tolak ($id_pinjam)
+    public function tolak($id_pinjam)
     {
         $this->db->where('id_pinjam', $id_pinjam);
         $this->db->update('peminjaman', ['status' => 'rejected']);
         redirect('petugas/validasi');
+    }
+
+    public function riwayat($tab = 'berjalan')
+    {
+
+        $data['tab_aktif'] = $tab;
+        $data['riwayat'] = $this->M_riwayat->get_semua_riwayat();
+
+        $this->load->view('layout/sidebar');
+        $this->load->view('petugas/riwayat_v', $data);
+
     }
 
 

@@ -7,7 +7,6 @@ class Peminjam extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // Cek login dulu, kalau bukan peminjam tendang ke login
         if ($this->session->userdata('role') != 'peminjam') {
             redirect('auth');
         }
@@ -15,7 +14,6 @@ class Peminjam extends CI_Controller
         $this->load->model('M_transaksi');
     }
 
-    // Tambahkan ini biar nggak 404 lagi!
     public function dashboard()
     {
         $data['nama'] = $this->session->userdata('nama_lengkap');
@@ -70,16 +68,33 @@ class Peminjam extends CI_Controller
         }
     }
 
-    public function riwayat()
+    public function riwayat($tab = 'berlangsung')
     {
         $id_user = $this->session->userdata('id_user');
+        $data['tab_aktif'] = $tab;
 
-        // Kita panggil data dari model M_transaksi
-        $data['riwayat'] = $this->M_transaksi->get_riwayat_peminjam($id_user);
+        $this->db->select('peminjaman.*, detail_peminjaman.*, alat.nama_alat');
+        $this->db->from('peminjaman');
+        $this->db->join('detail_peminjaman', 'peminjaman.id_pinjam = detail_peminjaman.id_pinjam');
+        $this->db->join('alat', 'detail_peminjaman.id_alat = alat.id_alat');
+        $this->db->where('peminjaman.id_user', $id_user); // Cuma filter berdasarkan User ID
+        $this->db->order_by('peminjaman.id_pinjam', 'DESC');
 
-        // Load view-nya
-        $this->load->view('layout/sidebar'); // Sidebar biar tetep ada
+        $data['riwayat'] = $this->db->get()->result();
+
+        $this->load->view('layout/sidebar');
         $this->load->view('peminjam/riwayat_v', $data);
+    }
+    //proses pengembalian oleh peminjam
+    public function kembalikan($id_pinjam)
+    {
+        // 1. Update status jadi 'pending_kembali' (Menunggu divalidasi Petugas)
+        $this->db->where('id_pinjam', $id_pinjam);
+        $this->db->update('peminjaman', ['status' => 'menunggu_validasi']);
+
+        $this->session->set_flashdata('pesan', 'Status berhasil diperbarui, tunggu petugas ngecek barang ya!');
+
+        redirect('peminjam/riwayat/berlangsung');
     }
 
     public function batal_pinjam($id_pinjam)

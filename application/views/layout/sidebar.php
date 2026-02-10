@@ -48,17 +48,15 @@
         background-color: #450a0a;
     }
 
-.main-container {
-    margin-left: 250px; 
-    padding: 40px;
-    /* Ganti width: 100% jadi lebar dinamis */
-    width: calc(100% - 250px); 
-    min-height: 100vh;
-    background-color: #f8fafc;
-    box-sizing: border-box;
-    /* Tambahan biar makin aman */
-    overflow-x: hidden; 
-}
+    .main-container {
+        margin-left: 250px;
+        padding: 40px;
+        width: calc(100% - 250px);
+        min-height: 100vh;
+        background-color: #f8fafc;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
 </style>
 
 <div class="sidebar">
@@ -76,14 +74,14 @@
     <?php elseif ($this->session->userdata('role') == 'petugas'): ?>
         <a href="<?= base_url('petugas/dashboard') ?>">📊 Dashboard Petugas</a>
         <a href="<?= base_url('petugas/validasi') ?>">📦 Validasi</a>
-        <a href="#">📑 Kelola Denda</a>
-        <a href="#">👥 Riwayat Peminjaman</a>
+        <a href="<?= base_url('petugas/denda') ?>">📑 Kelola Denda</a>
+        <a href="<?= base_url('petugas/riwayat/berjalan') ?>">👥 Riwayat Peminjaman</a>
 
 
     <?php else: ?>
         <a href="<?= base_url('peminjam/dashboard') ?>">🏠 Dashboard Peminjam</a>
         <a href="<?= base_url('peminjam/katalog') ?>">🔍 Cari & Pinjam Alat</a>
-        <a href="<?= base_url('peminjam/riwayat')?> ">🕒 Riwayat Peminjaman</a>
+        <a href="<?= base_url('peminjam/riwayat') ?> ">🕒 Riwayat Peminjaman</a>
     <?php endif; ?>
 
     <a href="<?= base_url('auth/logout') ?>" class="logout">🚪 Keluar Aplikasi</a>

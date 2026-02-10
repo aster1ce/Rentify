@@ -16,6 +16,19 @@ class Peminjam extends CI_Controller
 
     public function dashboard()
     {
+        $id_user = $this->session->userdata('id_user');
+
+        // Ambil 5 aktivitas terbaru dari riwayat peminjaman
+// Sekarang kueri ini gak bakal ngamuk lagi karena id_alat sudah ada
+        $data['aktivitas'] = $this->db->select('peminjaman.*, alat.nama_alat')
+            ->from('peminjaman')
+            ->join('alat', 'alat.id_alat = peminjaman.id_alat')
+            ->where('peminjaman.id_user', $id_user)
+            ->order_by('peminjaman.id_pinjam', 'DESC')
+            ->limit(5)
+            ->get()
+            ->result();
+
         $data['nama'] = $this->session->userdata('nama_lengkap');
         $this->load->view('layout/sidebar');
         $this->load->view('peminjam/dashboard_v', $data); //ROOT BAJIGUHBD

@@ -40,10 +40,36 @@ class Petugas extends CI_Controller
         $this->db->where('id_alat', $detail->id_alat);
         $this->db->update('alat');
 
-        // 3. Update status peminjaman jadi 'selesai'
+        // Update status peminjaman jadi 'selesai'
         $this->db->where('id_pinjam', $id_pinjam);
         $this->db->update('peminjaman', ['status' => 'selesai', 'tgl_kembali' => date('Y-m-d')]);
 
+        redirect('petugas/validasi');
+    }
+
+    public function setujui($id_pinjam)
+    {
+
+        // update status 
+        $this->db->where('id_pinjam', $id_pinjam);
+        $this->db->update('peminjaman', ['status' => 'approved']);
+
+        // get detail alat dulu bosqu
+        $detail = $this->db->get_where('detail_peminjaman', ['id_pinjam' => $id_pinjam])->row();
+
+        // kurangin stoknya
+        $this->db->set('stok', 'stok - ' . $detail->jumlah_pinjam, false);
+        $this->db->where('id_alat', $detail->id_alat);
+        $this->db->update('alat');
+
+        // redirect balik
+        redirect('petugas/validasi');
+    }
+
+    public function tolak ($id_pinjam)
+    {
+        $this->db->where('id_pinjam', $id_pinjam);
+        $this->db->update('peminjaman', ['status' => 'rejected']);
         redirect('petugas/validasi');
     }
 

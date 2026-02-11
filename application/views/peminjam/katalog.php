@@ -133,7 +133,7 @@
 
                             <?php if ($a->stok <= 0): ?>
                                 <div class="out-of-stock-overlay">
-                                    <span class="badge bg-danger rounded-pill px-3 py-2">Habis Terjual</span>
+                                    <span class="badge bg-danger rounded-pill px-3 py-2">Stok Habis</span>
                                 </div>
                             <?php endif; ?>
 

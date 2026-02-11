@@ -43,13 +43,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 80px;
+            height: 90px;
             margin-bottom: 10px;
             overflow: hidden;
         }
 
         .login-logo-img {
-            width: 200px;
+            width: 100px;
             /* Sedikit lebih besar untuk halaman login */
             height: auto;
             object-fit: contain;

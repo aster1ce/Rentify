@@ -1,4 +1,4 @@
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
@@ -6,8 +6,9 @@
     :root {
         --hijau-utama: #1e5631;
         --hijau-muda: #e9f5ee;
-        --text-abu: #64748b;
-        --text-gelap: #334155;
+        --text-dark: #1e293b;
+        --text-muted: #64748b;
+        --sidebar-bg: #ffffff;
     }
 
     body {
@@ -16,128 +17,174 @@
         background-color: #f8fafc;
     }
 
+    /* Sidebar Container */
     .sidebar {
         width: 280px;
         height: 100vh;
-        background: #ffffff;
+        background-color: var(--sidebar-bg);
         position: fixed;
-        padding: 15px 20px;
-        /* Padding dikecilkan biar gak terlalu turun */
+        top: 0;
+        left: 0;
+        padding: 20px 15px;
+        z-index: 1000;
+        border-right: 1px solid rgba(0, 0, 0, 0.06);
         display: flex;
         flex-direction: column;
-        border-right: 1px solid rgba(0, 0, 0, 0.05);
-        z-index: 1000;
+        box-sizing: border-box;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.02);
     }
 
-    /* Logo Area - Jarak dirapatkan */
+    /* Brand Logo Section */
     .brand-section {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 80px;
-        /* Tinggi dibatasi */
-        margin-top: 5px;
-        margin-bottom: 5px;
+        margin-bottom: 25px;
         overflow: hidden;
     }
 
     .brand-logo-img {
-        width: 140px;
-        /* Ukuran pas */
+        width: 100px;
         height: auto;
         object-fit: contain;
-        /* Jika file gambar punya whitespace, scale ini akan menariknya keluar */
         transform: scale(1.3);
-        transition: transform 0.3s ease;
+        filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.03));
     }
 
-    /* Menu Styling */
+    /* Menu Container */
+    .sidebar-menu {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 10px 5px;
+    }
+
     .menu-label {
-        font-size: 11px;
-        font-weight: 700;
-        color: #94a3b8;
         text-transform: uppercase;
-        margin: 15px 0 10px 15px;
-        /* Jarak antar label menu rapat */
-        letter-spacing: 1px;
+        font-size: 11px;
+        font-weight: 800;
+        color: #adb5bd;
+        letter-spacing: 1.2px;
+        margin: 20px 0 10px 12px;
+        display: block;
     }
 
-    .nav-list {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        /* Jarak antar item menu rapat */
-    }
-
-    .nav-item {
+    /* Item Navigasi - Force Style */
+    .sidebar .nav-link {
+        padding: 14px 18px !important;
         text-decoration: none !important;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 18px;
-        color: var(--text-abu);
-        font-weight: 600;
-        font-size: 15px;
-        border-radius: 14px;
-        transition: all 0.2s ease;
+        color: var(--text-muted) !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 15px !important;
+        border-radius: 14px !important;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        margin-bottom: 6px !important;
+        border: 1px solid transparent !important;
+    }
+
+    .sidebar .nav-link i {
+        font-size: 1.3rem !important;
+        color: #94a3b8 !important;
+        transition: color 0.2s ease;
+    }
+
+    /* Hover Effect */
+    .sidebar .nav-link:hover {
+        background-color: var(--hijau-muda) !important;
+        color: var(--hijau-utama) !important;
+        transform: translateX(5px);
+    }
+
+    .sidebar .nav-link:hover i {
+        color: var(--hijau-utama) !important;
     }
 
     /* Active State */
-    .nav-item.active {
-        background-color: var(--hijau-utama);
+    .sidebar .nav-link.active {
+        background-color: var(--hijau-utama) !important;
         color: white !important;
-        box-shadow: 0 4px 12px rgba(30, 86, 49, 0.15);
+        box-shadow: 0 10px 15px rgba(30, 86, 49, 0.2) !important;
     }
 
-    .nav-item:hover:not(.active) {
-        background-color: var(--hijau-muda);
-        color: var(--hijau-utama);
+    .sidebar .nav-link.active i {
+        color: white !important;
     }
 
-    /* User Card Bottom */
-    .user-card {
+    /* Footer & User Profile */
+    .sidebar-footer {
         margin-top: auto;
-        padding: 12px;
+        padding-top: 15px;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .user-profile {
         background: #f8fafc;
+        padding: 12px 15px;
         border-radius: 16px;
         display: flex;
         align-items: center;
         gap: 12px;
+        margin-bottom: 12px;
         border: 1px solid #f1f5f9;
     }
 
     .user-avatar {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
+        width: 42px;
+        height: 42px;
         background: var(--hijau-utama);
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
+        font-size: 1.2rem;
     }
 
-    .logout-btn {
-        margin-top: 10px;
-        color: #ef4444;
+    .user-details {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+
+    .user-name {
         font-size: 14px;
         font-weight: 700;
+        color: var(--text-dark);
+    }
+
+    .user-role {
+        font-size: 11px;
+        color: var(--text-muted);
+    }
+
+    /* Logout Button */
+    .logout-btn {
+        padding: 14px 18px !important;
+        color: #ef4444 !important;
         text-decoration: none !important;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 18px;
-        border-radius: 14px;
+        display: flex !important;
+        align-items: center !important;
+        gap: 15px !important;
+        border-radius: 14px !important;
+        font-weight: 700 !important;
+        font-size: 14px !important;
+        transition: 0.2s ease !important;
     }
 
     .logout-btn:hover {
-        background: #fef2f2;
+        background-color: #fef2f2 !important;
     }
 
+    /* Container Utama */
     .main-container {
         margin-left: 280px;
-        padding: 30px;
+        padding: 40px;
         width: calc(100% - 280px);
+        min-height: 100vh;
+        box-sizing: border-box;
     }
 </style>
 
@@ -148,64 +195,72 @@
         </a>
     </div>
 
-    <div class="nav-list">
+    <div class="sidebar-menu">
         <?php
-        $current_page = $this->uri->segment(2);
-        $role_page = $this->uri->segment(1);
+        $current = $this->uri->segment(2);
+        $role = $this->session->userdata('role');
         ?>
 
-        <?php if ($this->session->userdata('role') == 'admin'): ?>
-            <div class="menu-label">Master Admin</div>
-            <a href="<?= base_url('admin/dashboard') ?>"
-                class="nav-item <?= ($current_page == 'dashboard') ? 'active' : '' ?>">
-                <i class="bi bi-grid"></i> Dashboard
+        <?php if ($role == 'admin'): ?>
+            <span class="menu-label">Menu Admin</span>
+            <a href="<?= base_url('admin/dashboard') ?>" class="nav-link <?= ($current == 'dashboard') ? 'active' : '' ?>">
+                <i class="bi bi-grid-1x2-fill"></i> Dashboard
             </a>
-            <a href="<?= base_url('alat') ?>" class="nav-item <?= ($role_page == 'alat') ? 'active' : '' ?>">
-                <i class="bi bi-box"></i> Kelola Alat
+            <a href="<?= base_url('alat') ?>" class="nav-link <?= ($this->uri->segment(1) == 'alat') ? 'active' : '' ?>">
+                <i class="bi bi-archive-fill"></i> Kelola Alat
             </a>
+            <a href="#" class="nav-link"><i class="bi bi-file-earmark-text-fill"></i> Data Peminjaman</a>
+            <a href="#" class="nav-link"><i class="bi bi-people-fill"></i> Management User</a>
 
-        <?php elseif ($this->session->userdata('role') == 'petugas'): ?>
-            <div class="menu-label">Petugas Area</div>
+        <?php elseif ($role == 'petugas'): ?>
+            <span class="menu-label">Menu Petugas</span>
             <a href="<?= base_url('petugas/dashboard') ?>"
-                class="nav-item <?= ($current_page == 'dashboard') ? 'active' : '' ?>">
+                class="nav-link <?= ($current == 'dashboard') ? 'active' : '' ?>">
                 <i class="bi bi-speedometer2"></i> Dashboard
             </a>
-            <a href="<?= base_url('petugas/validasi') ?>"
-                class="nav-item <?= ($current_page == 'validasi') ? 'active' : '' ?>">
-                <i class="bi bi-shield-check"></i> Validasi
+            <a href="<?= base_url('petugas/validasi') ?>" class="nav-link <?= ($current == 'validasi') ? 'active' : '' ?>">
+                <i class="bi bi-patch-check-fill"></i> Validasi
+            </a>
+            <a href="<?= base_url('petugas/denda') ?>" class="nav-link <?= ($current == 'denda') ? 'active' : '' ?>">
+                <i class="bi bi-cash-stack"></i> Kelola Denda
+            </a>
+            <a href="<?= base_url('petugas/riwayat') ?>" class="nav-link <?= ($current == 'riwayat') ? 'active' : '' ?>">
+                <i class="bi bi-clock-history"></i> Riwayat Peminjaman
             </a>
 
         <?php else: ?>
-            <div class="menu-label">Menu Peminjam</div>
+            <span class="menu-label">Menu Peminjam</span>
             <a href="<?= base_url('peminjam/dashboard') ?>"
-                class="nav-item <?= ($current_page == 'dashboard' || $current_page == '') ? 'active' : '' ?>">
-                <i class="bi bi-house-door"></i> Beranda
+                class="nav-link <?= ($current == 'dashboard' || $current == '') ? 'active' : '' ?>">
+                <i class="bi bi-house-door-fill"></i> Dashboard
             </a>
-            <a href="<?= base_url('peminjam/katalog') ?>"
-                class="nav-item <?= ($current_page == 'katalog' || $current_page == 'detail_alat') ? 'active' : '' ?>">
-                <i class="bi bi-bag"></i> Pinjam Alat
+            <a href="<?= base_url('peminjam/katalog') ?>" class="nav-link <?= ($current == 'katalog') ? 'active' : '' ?>">
+                <i class="bi bi-search-heart-fill"></i> Cari & Pinjam
             </a>
-            <a href="<?= base_url('peminjam/riwayat') ?>"
-                class="nav-item <?= ($current_page == 'riwayat') ? 'active' : '' ?>">
-                <i class="bi bi-clock-history"></i> Riwayat
+            <a href="<?= base_url('peminjam/riwayat') ?>" class="nav-link <?= ($current == 'riwayat') ? 'active' : '' ?>">
+                <i class="bi bi-hourglass-split"></i> Riwayat Saya
             </a>
-            <a href="<?= base_url('peminjam/denda') ?>" class="nav-item <?= ($current_page == 'denda') ? 'active' : '' ?>">
-                <i class="bi bi-exclamation-circle"></i> Denda Saya
+            <a href="<?= base_url('peminjam/denda') ?>" class="nav-link <?= ($current == 'denda') ? 'active' : '' ?>">
+                <i class="bi bi-exclamation-triangle-fill"></i> Denda Saya
             </a>
         <?php endif; ?>
     </div>
 
-    <div class="user-card">
-        <div class="user-avatar"><i class="bi bi-person"></i></div>
-        <div class="user-info">
-            <span><?= $this->session->userdata('username') ?></span>
-            <small><?= ucfirst($this->session->userdata('role')) ?></small>
+    <div class="sidebar-footer">
+        <div class="user-profile">
+            <div class="user-avatar">
+                <i class="bi bi-person-fill"></i>
+            </div>
+            <div class="user-details">
+                <span class="user-name"><?= $this->session->userdata('username') ?></span>
+                <span class="user-role"><?= ucfirst($role) ?></span>
+            </div>
         </div>
-    </div>
 
-    <a href="<?= base_url('auth/logout') ?>" class="logout-btn">
-        <i class="bi bi-box-arrow-right"></i> Keluar
-    </a>
+        <a href="<?= base_url('auth/logout') ?>" class="logout-btn">
+            <i class="bi bi-box-arrow-right"></i> Keluar Aplikasi
+        </a>
+    </div>
 </div>
 
 <div class="main-container">

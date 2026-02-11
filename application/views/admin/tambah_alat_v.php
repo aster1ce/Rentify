@@ -1,21 +1,164 @@
-<div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    <h2>Tambah Alat Baru</h2>
-    <form action="<?= base_url('alat/proses_tambah') ?>" method="post">
-        <label>Nama Alat</label><br>
-        <input type="text" name="nama_alat" required style="width: 100%; padding: 10px; margin: 10px 0;"><br>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-        <label>Kategori</label><br>
-        <select name="id_kategori" required style="width: 100%; padding: 10px; margin: 10px 0;">
-            <?php foreach($kategori as $k) : ?>
-                <option value="<?= $k['id_kategori'] ?>"><?= $k['nama_kategori'] ?></option>
-            <?php endforeach; ?>
-        </select><br>
+<style>
+    :root {
+        --green-elegant: #1e5631;
+        --soft-bg: #f8fafc;
+        --text-dark: #1e293b;
+    }
 
-        <label>Stok</label><br>
-        <input type="number" name="stok" required style="width: 100%; padding: 10px; margin: 10px 0;"><br>
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: var(--soft-bg);
+    }
 
-        <button type="submit" style="background: #10b981; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer;">
-            💾 Simpan Alat
-        </button>
-    </form>
+    .form-container {
+        padding: 30px;
+    }
+
+    .form-card {
+        background: white;
+        padding: 40px;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        border: none;
+        max-width: 700px;
+        /* Batas lebar agar tidak terlalu melar */
+        margin: 0 auto;
+        /* Tengah secara horizontal */
+    }
+
+    .form-title {
+        font-weight: 800;
+        color: var(--text-dark);
+        letter-spacing: -1px;
+        margin-bottom: 5px;
+    }
+
+    .form-label {
+        font-weight: 700;
+        color: var(--text-dark);
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        margin-top: 15px;
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 12px;
+        padding: 12px 18px;
+        border: 2px solid #f1f5f9;
+        font-weight: 600;
+        color: var(--text-dark);
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--green-elegant);
+        box-shadow: none;
+        background-color: #fff;
+    }
+
+    .btn-save {
+        background: var(--green-elegant);
+        color: white;
+        padding: 14px 24px;
+        border-radius: 14px;
+        font-weight: 700;
+        border: none;
+        width: 100%;
+        margin-top: 30px;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn-save:hover {
+        background: #153e23;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(30, 86, 49, 0.2);
+    }
+
+    .btn-back {
+        color: #64748b;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 20px;
+        transition: 0.3s;
+    }
+
+    .btn-back:hover {
+        color: var(--green-elegant);
+    }
+
+    /* Styling khusus icon dalam input */
+    .input-group-text {
+        background: #f8fafc;
+        border: 2px solid #f1f5f9;
+        border-right: none;
+        border-radius: 12px 0 0 12px;
+        color: #94a3b8;
+    }
+
+    .has-icon .form-control {
+        border-radius: 0 12px 12px 0;
+    }
+</style>
+
+<div class="form-container">
+    <a href="<?= base_url('alat/index/alat') ?>" class="btn-back">
+        <i class="bi bi-arrow-left me-2"></i> Kembali ke Daftar Alat
+    </a>
+
+    <div class="form-card">
+        <div class="mb-4">
+            <h2 class="form-title">Tambah Alat Baru</h2>
+            <p class="text-muted small">Pastikan data alat yang dimasukkan sudah benar.</p>
+        </div>
+
+        <form action="<?= base_url('alat/proses_tambah') ?>" method="post">
+            <div class="mb-3">
+                <label class="form-label">Nama Alat</label>
+                <div class="input-group has-icon">
+                    <span class="input-group-text"><i class="bi bi-tag"></i></span>
+                    <input type="text" name="nama_alat" class="form-control" placeholder="Contoh: Kamera Canon EOS"
+                        required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Kategori</label>
+                <div class="input-group has-icon">
+                    <span class="input-group-text"><i class="bi bi-grid"></i></span>
+                    <select name="id_kategori" class="form-select" required>
+                        <option value="" disabled selected>Pilih Kategori...</option>
+                        <?php foreach ($kategori as $k): ?>
+                            <option value="<?= $k['id_kategori'] ?>"><?= $k['nama_kategori'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Jumlah Stok</label>
+                <div class="input-group has-icon">
+                    <span class="input-group-text"><i class="bi bi-box-seam"></i></span>
+                    <input type="number" name="stok" class="form-control" placeholder="0" min="0" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-save">
+                <i class="bi bi-cloud-arrow-up-fill"></i> Simpan Data Alat
+            </button>
+        </form>
+    </div>
 </div>

@@ -1,159 +1,206 @@
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 <style>
     :root {
         --green-elegant: #1e5631;
-        --green-hover: #153e23;
         --soft-bg: #f8fafc;
+        --text-dark: #1e293b;
     }
 
     body {
         font-family: 'Plus Jakarta Sans', sans-serif;
         background-color: var(--soft-bg);
+        overflow-x: hidden;
     }
 
-    /* Container - Sama persis dengan Dashboard & Katalog */
-    .dashboard-container {
-        padding: 20px;
-        max-width: 1200px;
-        /* Jika pakai sidebar fixed 260px, aktifkan margin-left ini: */
-        /* margin-left: 260px; */
+    /* KALIBRASI POSISI: Mengikuti standar Katalog & Riwayat sebelumnya */
+    .detail-container {
+        padding: 30px;
+        min-height: 100vh;
     }
 
-    /* Card Styling - Mengikuti gaya Glass Card Dashboard */
+    /* Card Styling */
     .detail-card {
+        max-width: 1100px;
+        margin: 0 auto;
         background: #ffffff;
-        border-radius: 25px;
-        border: 1px solid rgba(0, 0, 0, 0.04);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+        border-radius: 30px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
         overflow: hidden;
     }
 
-    .img-wrapper {
-        background: #fcfcfc;
+    .img-section {
+        background-color: #f1f5f9;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 30px;
-        border-right: 1px solid #f1f5f9;
+        padding: 20px;
     }
 
-    .img-display {
-        width: 100%;
+    .img-section img {
         border-radius: 20px;
-        object-fit: cover;
-        aspect-ratio: 1/1;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: transform 0.5s ease;
     }
 
-    /* Typography & Buttons - Konsisten dengan tema Elegant Green */
-    .fw-800 {
-        font-weight: 800;
+    .img-section img:hover {
+        transform: scale(1.02);
     }
 
-    .text-abu {
-        color: #64748b;
+    .content-section {
+        padding: 40px !important;
     }
 
-    .btn-green-modern {
-        background: var(--green-elegant);
-        color: white;
-        border-radius: 15px;
-        padding: 15px 25px;
+    .badge-stok {
+        background: #e9f5ee;
+        color: var(--green-elegant);
         font-weight: 700;
-        border: none;
+        padding: 8px 16px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        display: inline-block;
+    }
+
+    .alat-title {
+        font-weight: 800;
+        font-size: 2.2rem;
+        color: var(--text-dark);
+        letter-spacing: -1px;
+        margin-top: 15px;
+    }
+
+    .deskripsi-text {
+        color: #64748b;
+        line-height: 1.8;
+        font-size: 1rem;
+    }
+
+    /* Form Styling */
+    .form-label {
+        font-weight: 700;
+        color: var(--text-dark);
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        border-radius: 14px;
+        padding: 12px 18px;
+        border: 2px solid #f1f5f9;
+        font-weight: 600;
         transition: 0.3s;
     }
 
-    .btn-green-modern:hover {
-        background: var(--green-hover);
-        color: white;
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(30, 86, 49, 0.2);
+    .form-control:focus {
+        border-color: var(--green-elegant);
+        box-shadow: none;
+        background-color: #fff;
     }
 
-    .form-label {
+    .btn-submit {
+        background: var(--green-elegant);
+        border: none;
+        border-radius: 16px;
+        padding: 16px;
         font-weight: 700;
-        color: #475569;
-        font-size: 0.85rem;
+        font-size: 1.1rem;
+        color: white;
+        transition: all 0.3s;
+        margin-top: 10px;
     }
 
-    .input-custom {
-        border-radius: 12px;
-        padding: 12px;
-        border: 1px solid #e2e8f0;
-        background: #f8fafc;
+    .btn-submit:hover {
+        background: #153e23;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(30, 86, 49, 0.2);
     }
 
     .btn-back {
-        color: var(--green-elegant);
+        color: #64748b;
         text-decoration: none;
         font-weight: 700;
+        font-size: 0.9rem;
         display: inline-flex;
         align-items: center;
         margin-bottom: 20px;
-        padding: 8px 16px;
-        border-radius: 10px;
-        background: rgba(30, 86, 49, 0.05);
-        transition: 0.2s;
+        transition: 0.3s;
     }
 
     .btn-back:hover {
-        background: rgba(30, 86, 49, 0.1);
+        color: var(--green-elegant);
     }
 </style>
 
-<div class="dashboard-container">
+<div class="detail-container">
     <a href="<?= base_url('peminjam/katalog') ?>" class="btn-back">
-        <i class="bi bi-arrow-left-short fs-4 me-1"></i> Kembali ke Katalog
+        <i class="bi bi-arrow-left me-2"></i> Kembali ke Katalog
     </a>
 
-    <div class="detail-card">
+    <div class="card detail-card border-0">
         <div class="row g-0">
-            <div class="col-lg-5 img-wrapper">
+            <div class="col-lg-5 img-section">
                 <img src="https://placehold.co/600x600/f1f5f9/1e5631?text=<?= urlencode($item->nama_alat) ?>"
-                    class="img-display" alt="<?= $item->nama_alat ?>">
+                    class="img-fluid w-100 h-100 object-fit-cover shadow-sm">
             </div>
 
-            <div class="col-lg-7 p-4 p-lg-5">
-                <div class="mb-4">
-                    <span class="badge px-3 py-2 mb-3"
-                        style="background: rgba(30, 86, 49, 0.1); color: var(--green-elegant); border-radius: 10px;">
-                        <i class="bi bi-box-seam me-2"></i> Stok: <?= $item->stok ?> Unit Tersedia
+            <div class="col-lg-7 content-section">
+                <div class="card-body p-0">
+                    <span class="badge-stok">
+                        <i class="bi bi-box-seam me-2"></i>Tersedia: <?= $item->stok ?> Unit
                     </span>
-                    <h1 class="fw-800 text-dark display-6 mb-3"><?= $item->nama_alat ?></h1>
-                    <p class="text-abu fs-6 leading-relaxed">
-                        <?= $item->deskripsi ?? 'Belum ada deskripsi untuk alat ini.' ?>
+                    
+                    <h1 class="alat-title"><?= $item->nama_alat ?></h1>
+                    
+                    <div class="mt-4 mb-4">
+                        <h6 class="fw-bold text-dark">Deskripsi Alat:</h6>
+                        <p class="deskripsi-text">
+                            <?= $item->deskripsi ?? 'Alat ini belum memiliki deskripsi detail. Silakan hubungi admin untuk informasi lebih lanjut.' ?>
+                        </p>
+                    </div>
+
+                    <hr class="my-4" style="border-top: 2px dashed #f1f5f9;">
+
+                    <form action="<?= base_url('peminjam/ajukan_pinjam') ?>" method="post">
+                        <input type="hidden" name="id_alat" value="<?= $item->id_alat ?>">
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Jumlah Pinjam</label>
+                                <div class="input-group">
+                                    <span class="input-group-text border-0 bg-light" style="border-radius: 14px 0 0 14px;">
+                                        <i class="bi bi-plus-slash-minus"></i>
+                                    </span>
+                                    <input type="number" id="jumlah_input"
+                                        name="jumlah" class="form-control" min="1" 
+                                        max="<?= $item->stok ?>" oninput="validasiStok(this)" 
+                                        onkeydown="return blockInvalidChars(event)" 
+                                        placeholder="0" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Tanggal Pengembalian</label>
+                                <div class="input-group">
+                                    <span class="input-group-text border-0 bg-light" style="border-radius: 14px 0 0 14px;">
+                                        <i class="bi bi-calendar-event"></i>
+                                    </span>
+                                    <input type="date" name="tgl_kembali" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-submit w-100 shadow-sm">
+                            <i class="bi bi-send-check me-2"></i> Ajukan Peminjaman Sekarang
+                        </button>
+                    </form>
+                    
+                    <p class="text-center text-muted small mt-4">
+                        <i class="bi bi-info-circle me-1"></i> Pengajuan akan divalidasi oleh admin sebelum disetujui.
                     </p>
                 </div>
-
-                <hr class="my-4 opacity-25">
-
-                <form action="<?= base_url('peminjam/ajukan_pinjam') ?>" method="post">
-                    <input type="hidden" name="id_barang" value="<?= $item->id_alat ?>">
-
-                    <div class="row g-3">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Jumlah Pinjam</label>
-                            <input type="number" name="jumlah" class="form-control input-custom" min="1"
-                                max="<?= $item->stok ?>" oninput="validasiStok(this)"
-                                onkeydown="return blockInvalidChars(event)" placeholder="Contoh: 1" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Rencana Kembali</label>
-                            <input type="date" name="tgl_kembali" class="form-control input-custom" required>
-                        </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-green-modern w-100 shadow-sm">
-                            <i class="bi bi-calendar-plus me-2"></i> Ajukan Peminjaman
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -163,8 +210,13 @@
     function validasiStok(input) {
         let max = parseInt(input.getAttribute('max'));
         let val = parseInt(input.value);
-        if (val > max) input.value = max;
-        if (val < 1 && input.value !== "") input.value = 1;
+
+        if (val > max) {
+            input.value = max;
+        }
+        if (val < 1) {
+            input.value = 1;
+        }
     }
 
     function blockInvalidChars(event) {

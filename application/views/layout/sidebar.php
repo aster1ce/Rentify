@@ -247,15 +247,6 @@
     </div>
 
     <div class="sidebar-footer">
-        <div class="user-profile">
-            <div class="user-avatar">
-                <i class="bi bi-person-fill"></i>
-            </div>
-            <div class="user-details">
-                <span class="user-name"><?= $this->session->userdata('username') ?></span>
-                <span class="user-role"><?= ucfirst($role) ?></span>
-            </div>
-        </div>
 
         <a href="<?= base_url('auth/logout') ?>" class="logout-btn">
             <i class="bi bi-box-arrow-right"></i> Keluar Aplikasi

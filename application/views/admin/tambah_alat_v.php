@@ -26,9 +26,7 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
         border: none;
         max-width: 700px;
-        /* Batas lebar agar tidak terlalu melar */
         margin: 0 auto;
-        /* Tengah secara horizontal */
     }
 
     .form-title {

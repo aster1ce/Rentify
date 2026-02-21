@@ -6,12 +6,11 @@ class Petugas extends CI_Controller
     {
         parent::__construct();
 
-        // panggil model
         $this->load->model('M_validasi');
         $this->load->model('M_riwayat');
     }
 
-    // Lier pake index jadinya ke root dashboard wehla
+    //ini buat nampilin data di dashb
     public function dashboard()
     {
         $data['total_pending'] = $this->db->get_where('peminjaman', ['status' => 'pending'])->num_rows();
@@ -45,7 +44,7 @@ class Petugas extends CI_Controller
         $this->db->where('id_pinjam', $id_pinjam);
         $this->db->update('peminjaman', ['status' => 'selesai', 'tgl_kembali' => date('Y-m-d')]);
 
-        redirect('petugas/validasi');
+        redirect('petugas/validasi/pengembalian');
     }
 
     public function setujui($id_pinjam)
@@ -82,6 +81,47 @@ class Petugas extends CI_Controller
 
         $this->load->view('layout/sidebar');
         $this->load->view('petugas/riwayat_v', $data);
+
+    }
+
+
+    // Lihatin Detail Validasi
+    public function detail_validasi($id_pinjam)
+    {
+
+        $this->db->select('
+    peminjaman.id_pinjam, 
+    peminjaman.tgl_pinjam, 
+    peminjaman.tgl_kembali, 
+    peminjaman.status, 
+    detail_peminjaman.jumlah_pinjam, 
+    alat.nama_alat, 
+    alat.stok as stok_gudang, 
+    users.nama_lengkap, 
+    users.username, 
+    users.role, 
+    users.status_akun
+    ');
+        $this->db->from('peminjaman');
+        $this->db->join('detail_peminjaman', 'peminjaman.id_pinjam = detail_peminjaman.id_pinjam');
+        $this->db->join('alat', 'detail_peminjaman.id_alat = alat.id_alat');
+        $this->db->join('users', 'peminjaman.id_user = users.id_user');
+
+        $this->db->where('peminjaman.id_pinjam', $id_pinjam);
+        $data['d'] = $this->db->get()->row();
+
+        if (!$data['d']) {
+
+            show_404();
+        }
+
+        $data['back_url'] = ($this->input->get('source') == 'riwayat') ? 'petugas/riwayat' : 'petugas/validasi';
+
+
+        $this->load->view('layout/sidebar');
+        $this->load->view('petugas/detail_validasi_v', $data);
+
+
 
     }
 

@@ -179,15 +179,27 @@
                                             </div>
                                         </td>
                                         <td class="pe-4">
-                                            <?php if ($r->status == 'approved'): ?>
-                                                <span class="badge-status bg-success text-white">Sedang Dipinjam</span>
-                                            <?php elseif ($r->status == 'selesai'): ?>
-                                                <span class="badge-status bg-secondary text-white">Sudah Kembali</span>
-                                            <?php elseif ($r->status == 'rejected'): ?>
-                                                <span class="badge-status bg-danger text-white">Ditolak</span>
-                                            <?php endif; ?>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div>
+                                                    <?php if ($r->status == 'approved'): ?>
+                                                        <span class="badge-status bg-success text-white">Sedang Dipinjam</span>
+                                                    <?php elseif ($r->status == 'selesai'): ?>
+                                                        <span class="badge-status bg-secondary text-white">Sudah Kembali</span>
+                                                    <?php elseif ($r->status == 'rejected'): ?>
+                                                        <span class="badge-status bg-danger text-white">Ditolak</span>
+                                                    <?php endif; ?>
+                                                </div>
+
+                                                <a href="<?= base_url('petugas/detail_validasi/' . $r->id_pinjam) ?>?source=riwayat"
+                                                    class="btn btn-sm btn-light border"
+                                                    style="border-radius: 10px; padding: 6px 12px;" title="Lihat Detail">
+                                                    <i class="bi bi-eye text-info"></i>
+                                                </a>
+                                            </div>
                                         </td>
+
                                     </tr>
+
                                     <?php
                                 endif;
                             endforeach;
